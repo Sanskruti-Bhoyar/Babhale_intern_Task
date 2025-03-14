@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrolling Text Demo</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #fdfeff;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 400px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .scrolling-container {
+            white-space: nowrap;
+            overflow-x: auto;
+            width: 100%;
+            padding: 5px 0;
+            /* Hide scrollbar for Chrome, Safari and Opera */
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .scrolling-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrolling-text {
+            display: inline-block;
+            animation: scrollText 10s linear infinite;
+        }
+
+        @keyframes scrollText {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="scrolling-container">
+            <div class="scrolling-text">This text is scrolling from left to right inside a div container.</div>
+        </div>
+    </div>
+
+    <script>
+        // Optional: If you want to pause the animation when hovering
+     
+        document.querySelector('.scrolling-container').addEventListener('mouseleave', function() {
+            document.querySelector('.scrolling-text').style.animationPlayState = 'running';
+        });
+    </script>
+</body>
+</html>
