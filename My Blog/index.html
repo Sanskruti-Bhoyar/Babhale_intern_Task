@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY BLOG</title>
+    <style>
+        /* General Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f0f0;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: row; /* Ensure horizontal layout */
+        }
+        
+        /* Header */
+        header {
+            width: 100%;
+            text-align: center;
+            padding: 30px 0;
+            background-color: #fff;
+            margin-bottom: 20px;
+        }
+        
+        header h1 {
+            font-size: 48px;
+            font-weight: normal;
+        }
+        
+        .welcome-message {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #666;
+        }
+        
+        .highlight {
+            background-color: #000;
+            color: #fff;
+            padding: 2px 8px;
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 2;
+            margin-right: 20px; /* Space between content and sidebar */
+            order: 1; /* Place main content first in order */
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            flex: 1;
+            order: 2; /* Place sidebar second in order */
+        }
+        
+        /* Blog Entry */
+        .blog-entry {
+            background-color: #fff;
+            margin-bottom: 30px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .blog-entry img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .blog-content {
+            padding: 20px;
+        }
+        
+        .blog-title {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: normal;
+        }
+        
+        .blog-date {
+            color: #999;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+        
+        .blog-text {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .read-more {
+            display: inline-block;
+            border: 1px solid #ddd;
+            padding: 10px 20px;
+            margin-right: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .read-more:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .comments {
+            display: inline-block;
+            float: right;
+        }
+        
+        .comments span {
+            display: inline-block;
+            background-color: #000;
+            color: #fff;
+            width: 25px;
+            height: 25px;
+            text-align: center;
+            line-height: 25px;
+            margin-left: 5px;
+        }
+        
+        /* Sidebar Widgets */
+        .sidebar-widget {
+            background-color: #fff;
+            margin-bottom: 30px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .widget-title {
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: normal;
+        }
+        
+        /* Profile Widget */
+        .profile-widget {
+            text-align: left;
+        }
+        
+        .profile-widget img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+        }
+        
+        .profile-name {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .profile-bio {
+            color: #666;
+        }
+        
+        /* Popular Posts Widget */
+        .popular-posts .post {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+        
+        .popular-posts img {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+        
+        .post-info h4 {
+            font-weight: normal;
+            margin-bottom: 5px;
+        }
+        
+        .post-info p {
+            color: #999;
+            font-size: 14px;
+        }
+        
+        /* Tags Widget */
+        .tags-widget .tags {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .tag {
+            margin: 5px;
+            padding: 5px 10px;
+            background-color: #f0f0f0;
+            border-radius: 3px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .tag.dark {
+            background-color: #000;
+            color: #fff;
+        }
+        
+        .tag:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .tag.dark:hover {
+            background-color: #333;
+        }
+        
+        /* Footer */
+        footer {
+            width: 100%;
+            padding: 0; /* Remove padding from footer */
+            background-color: #666;
+            color: #fff;
+            margin-top: 30px;
+        }
+        
+        footer a {
+            color: #fff;
+        }
+        
+        /* Footer Navigation */
+        .footer-navigation {
+            display: flex;
+            width: 100%;
+        }
+        
+        .nav-button {
+            padding: 15px 30px;
+            color: #fff;
+            background-color: #666;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .nav-button:hover {
+            background-color: #555;
+        }
+        
+        .nav-button.dark {
+            background-color: #000;
+        }
+        
+        .nav-button.dark:hover {
+            background-color: #333;
+        }
+        
+        /* Footer Info */
+        .footer-info {
+            padding: 20px;
+            text-align: left;
+        }
+        
+        .footer-info a {
+            text-decoration: underline;
+        }
+
+        /* Clear fix */
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .main-content {
+                order: 1;
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            
+            .sidebar {
+                order: 2;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>MY BLOG</h1>
+        <div class="welcome-message">Welcome to the blog of <span class="highlight">Sanskruti</span></div>
+    </header>
+    
+    <div class="container">
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Blog Entry 1 -->
+            <article class="blog-entry">
+                <img src="images/mountains.jpg" alt="Nature landscape with mountains and sunset">
+                <div class="blog-content">
+                    <h2 class="blog-title">TITLE HEADING</h2>
+                    <span class="blog-date">Title description, April 7, 2014</span>
+                    <p class="blog-text">Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+                    <div class="clearfix">
+                        <a href="#" class="read-more">READ MORE »</a>
+                        <div class="comments">Comments <span>0</span></div>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Blog Entry 2 -->
+            <article class="blog-entry">
+                <img src="images/mountain2.jpg" alt="Person walking on a bridge in nature">
+                <div class="blog-content">
+                    <h2 class="blog-title">BLOG ENTRY</h2>
+                    <span class="blog-date">Title description, April 2, 2014</span>
+                    <p class="blog-text">Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+                    <div class="clearfix">
+                        <a href="#" class="read-more">READ MORE »</a>
+                        <div class="comments">Comments <span>2</span></div>
+                    </div>
+                </div>
+            </article>
+        </div>
+        
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Profile Widget -->
+            <div class="sidebar-widget profile-widget">
+                <img src="images/profile.jpg" alt="Portrait photo">
+                <h3 class="profile-name">Sanskruti Bhoyar</h3>
+                <p class="profile-bio">Just me, myself and I, exploring the universe of uknownment. I have a heart of love and a interest of lorem ipsum and mauris neque quam blog. I want to share my world with you.</p>
+            </div>
+            
+            <!-- Popular Posts Widget -->
+            <div class="sidebar-widget popular-posts">
+                <h3 class="widget-title">Popular Posts</h3>
+                <div class="post">
+                    <img src="images/1.jpg" alt="Thumbnail">
+                    <div class="post-info">
+                        <h4>Lorem</h4>
+                        <p>Sed mattis nunc</p>
+                    </div>
+                </div>
+                <div class="post">
+                    <img src="images/2.jpg" alt="Thumbnail">
+                    <div class="post-info">
+                        <h4>Ipsum</h4>
+                        <p>Praes tinci sed</p>
+                    </div>
+                </div>
+                <div class="post">
+                    <img src="images/1.jpg" alt="Thumbnail">
+                    <div class="post-info">
+                        <h4>Dorum</h4>
+                        <p>Ultricies congue</p>
+                    </div>
+                </div>
+                <div class="post">
+                    <img src="images/2.jpg" alt="Thumbnail">
+                    <div class="post-info">
+                        <h4>Mingsum</h4>
+                        <p>Lorem ipsum dipsum</p>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="sidebar-widget tags-widget">
+                <h3 class="widget-title">Tags</h3>
+                <div class="tags">
+                    <a href="#" class="tag dark">Travel</a>
+                    <a href="#" class="tag">New York</a>
+                    <a href="#" class="tag">London</a>
+                    <a href="#" class="tag">IKEA</a>
+                    <a href="#" class="tag">NORWAY</a>
+                    <a href="#" class="tag">DIY</a>
+                    <a href="#" class="tag">Ideas</a>
+                    <a href="#" class="tag">Baby</a>
+                    <a href="#" class="tag">Family</a>
+                    <a href="#" class="tag">News</a>
+                    <a href="#" class="tag">Clothing</a>
+                    <a href="#" class="tag">Shopping</a>
+                    <a href="#" class="tag">Sports</a>
+                    <a href="#" class="tag">Games</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <!-- Footer Navigation -->
+        <div class="footer-navigation">
+            <a href="#" class="nav-button">Previous</a>
+            <a href="#" class="nav-button dark">Next »</a>
+        </div>
+        <!-- Footer Info -->
+        <div class="footer-info">
+            <p>Powered by <a href="#">w3.css</a></p>
+        </div>
+    </footer>
+</body>
+</html>
